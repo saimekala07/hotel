@@ -1,0 +1,42 @@
+<h1>Book Reservation</h1>
+<%= form_with(model: @reservation, local: true) do |form| %>
+  <% if @failures.present? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@failures.errors.to_h.size, "error") %> prohibited this reservation from being saved:</h2>
+      <ul>
+        <div class='alert alert-error'>
+
+          <% @failures.errors.to_h.each do |name, message| %>
+              <ul>
+                <li><%= "#{name.to_s.humanize}: #{message.first}" %></li>
+              </ul>
+          <% end %>
+        </div>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :check_in %>
+    <%= form.date_field :start_date, value: form.object.start_date|| Date.today %>
+  </div>
+
+  <div class="field">
+    <%= form.label :check_out %>
+    <%= form.date_field :end_date, value: form.object.end_date || Date.today %>
+  </div>
+
+  <div class="field">
+    <%= form.label :room_type %>
+    <%= form.select :room_type, RoomType.all.map(&:name), value: form.object.room_type%>
+  </div>
+
+  <div class="field">
+    <%= form.label :Guests %>
+    <%= form.select :num_of_user, {1 => 1, 2 => 2, 3 => 3, 4 => 4, 5=> 5} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

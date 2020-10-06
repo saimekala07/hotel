@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotel</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <% if user_signed_in? %>
+    <li><a class="hvr-bounce-to-bottom" ><%= current_user.email %></a></li>
+    <li><%= link_to 'Reservations', reservations_path,class: "hvr-bounce-to-bottom" %></li>
+    <li><%= link_to 'Log out', destroy_user_session_path,class: "hvr-bounce-to-bottom", method: :delete %></li>
+<% end %>
+  <body>
+    <%= yield %>
+  </body>
+</html>
