@@ -1,9 +1,9 @@
 class Api::V1::ReservationsController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index]
 
   def index
-   @reservations = current_user.reservations
-   render json: @reservations
+    @reservations = current_user.reservations
+    render json: @reservations
   end
 
   def availabile_rooms
